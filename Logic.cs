@@ -1,4 +1,6 @@
 using CmdOptions;
+using System;
+using System.Diagnostics;
 
 namespace CleanerLogic {
 	public static class Logic {
@@ -191,6 +193,17 @@ namespace CleanerLogic {
 			{
 				try
 				{
+					Console.WriteLine( System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+					if (item == System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName){
+						Console.WriteLine("You are about to delete the cleaner.");
+						Console.WriteLine("Are you sure you want to proceed? [Y/n]");
+						if (Console.ReadLine() == "Y")
+							File.Delete(item);
+						else {
+							continue;
+						}
+
+					}
 					File.Delete(item);
 				}
 				catch

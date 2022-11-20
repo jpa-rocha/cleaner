@@ -193,16 +193,24 @@ namespace CleanerLogic {
 			{
 				try
 				{
-					Console.WriteLine( System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
 					if (item == System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName){
 						Console.WriteLine("You are about to delete the cleaner.");
+						Console.Write("Are you sure you want to proceed? [Y/n]: ");
+						if (Console.ReadLine() == "Y")
+							File.Delete(item);
+						else {
+							continue;
+						}
+					}
+					if (item.Contains("Makefile") == true)
+					{
+						Console.WriteLine("You are about to delete a Makefile.");
 						Console.WriteLine("Are you sure you want to proceed? [Y/n]");
 						if (Console.ReadLine() == "Y")
 							File.Delete(item);
 						else {
 							continue;
 						}
-
 					}
 					File.Delete(item);
 				}
